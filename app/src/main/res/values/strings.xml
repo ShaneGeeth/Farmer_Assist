@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Farmer_Assist</string>
+    <string name="textview">New</string>
 </resources>
