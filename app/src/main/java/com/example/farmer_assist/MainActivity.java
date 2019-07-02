@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
         EditText usernameET= (EditText) findViewById(R.id.loginUserNameEditText);
         EditText passwordET=(EditText) findViewById(R.id.loginPasswordEdittext);
 
+
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -29,5 +31,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button regbtn=(Button) findViewById(R.id.regactivity);
+        regbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,Register.class);
+                startActivity(intent);
+
+            }
+        });
     }
 }

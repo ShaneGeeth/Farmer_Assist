@@ -13,9 +13,9 @@ import java.util.Scanner;
 public class NetworkUtil2 {
     private static final String TAG = "NetworkUtils2";
     private final static String WEATHERDB_BASE_URL=
-            "http://dataservice.accuweather.com/locations/v1/cities/search?";
+            "http://api.openweathermap.org/data/2.5/weather?";
 
-    private final static String API_KEY="********************************";
+    private final static String API_KEY="cbc4915049f71da44764d66f2d4b3768";
 
     private final static String METRIC_VALUE="true";
 

@@ -66,4 +66,14 @@
         app:layout_constraintTop_toBottomOf="@+id/loginPasswordEdittext"
         app:layout_constraintVertical_bias="0.153" />
 
+    <Button
+        android:id="@+id/regactivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Register"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginBtn"
+        tools:layout_editor_absoluteX="108dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,20 +9,20 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
-
+///data/2.5/forecast?q=London,us&appid=b6907d289e10d714a6e88b30761fae22
 public class NetworkUtill{
     private static final String TAG = "NetworkUtils";
     private final static String WEATHERDB_BASE_URL=
-            "http://dataservice.accuweather.com/forecasts/v1/daily/5day/206470";
-    private final static String API_KEY="********************************";
+            "http://api.openweathermap.org/data/2.5/forecast?";
+    private final static String API_KEY="f49014010c0e881f28022c52917838d9";
     private final static String METRIC_VALUE="true";
     private final static String PARAM_API_KEY="apikey";
-    private final static String PARAM_METRIC= "metric";
+    private final static String PARAM_METRIC= "q";
 
-    public static URL buildUrlForWeather(){
+    public static URL buildUrlForWeather(String city){
         Uri buildUri = Uri.parse(WEATHERDB_BASE_URL).buildUpon()
                 .appendQueryParameter(PARAM_API_KEY,API_KEY)
-                .appendQueryParameter(PARAM_METRIC,METRIC_VALUE)
+                .appendQueryParameter(PARAM_METRIC,city)
                 .build();
         URL url=null;
         try {
