@@ -37,7 +37,7 @@ public class ShowWeatherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_weather);
         listView=findViewById(R.id.idListView2);
-         tempretureTV=findViewById(R.id.tempretureTV);
+        tempretureTV=findViewById(R.id.tempretureTV);
         //url for get current weather by refering city
         URL weatherUrl = NetworkUtil2.buildUrlForWeather(city);
         //url for get current weather by refering city
@@ -117,6 +117,7 @@ public class ShowWeatherActivity extends AppCompatActivity {
         protected void onPostExecute(String weatherSearchResults2) {
             Log.i(TAG, weatherSearchResults2);
             super.onPostExecute(weatherSearchResults2);
+            parseJSON2(weatherSearchResults2);
         }
     }
 

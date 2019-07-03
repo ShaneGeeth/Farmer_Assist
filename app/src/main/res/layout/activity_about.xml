@@ -48,23 +48,23 @@
                 >
 
                 <TextView
-                    android:id="@+id/tempretureTV"
+                    android:id="@+id/about_head"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="34C"
+                    android:text="About"
                     android:textAlignment="center"
                     android:textSize="50sp" />
-                <ListView
-                    android:id="@+id/idListView2"
-                    android:layout_weight="1"
+                <TextView
+                    android:id="@+id/about_text"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="5"
+                    android:layout_margin="10dp"
+                    android:text="This is the Farmer Assists mobile app. "
                     />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
-
-
 </LinearLayout>

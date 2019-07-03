@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:weightSum="10"
     android:background="@drawable/bg01"
-    tools:context=".UserDashboard">
+    tools:context=".ShowProducts">
 
     <RelativeLayout
         android:layout_weight="2"
@@ -52,7 +53,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="34C"
+                    android:text="Products"
                     android:textAlignment="center"
                     android:textSize="50sp" />
                 <ListView
@@ -66,5 +67,16 @@
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
 
-
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@android:drawable/ic_menu_add"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        fab:fab_colorNormal="#FF4081"
+        fab:fab_colorPressed="#C2185B"
+        fab:fab_colorRipple="#F06292"/>
 </LinearLayout>

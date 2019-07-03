@@ -8,15 +8,18 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class UserHandler extends SQLiteOpenHelper {
     private User user;
+
+
     //colums
     private final String first_name="first_name";
     private final String last_name="last_name";
     private final String address="address";
     private final String email="email";
-    private final String password="address";
+    private final String password="password";
     private final String telephone="telephone";
 
     public static final String DATABASE_NAME = "farm_assist_db";
@@ -30,9 +33,10 @@ public class UserHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL("DROP TABLE IF EXISTS user");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS user (\n" +
-                "    id int NOT NULL CONSTRAINT user_pk PRIMARY KEY,\n" +
+                "    id  varchar(200) NOT NULL  CONSTRAINT user_pk PRIMARY KEY,\n" +
                 "    first_name varchar(200) NOT NULL,\n" +
                 "    last_name varchar(200) NOT NULL,\n" +
                 "    email varchar(200) UNIQUE NOT NULL,\n" +
@@ -57,6 +61,11 @@ public class UserHandler extends SQLiteOpenHelper {
     }
 
     public boolean createNewUser(User newUser){
+        // creating UUID
+        UUID uid = UUID.randomUUID();
+
+        // checking hash code value
+        String val=uid.toString();
         long newRowId = 0;
         //create new user in DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -68,7 +77,8 @@ public class UserHandler extends SQLiteOpenHelper {
         values.put(this.address, newUser.getAddress());
         values.put(this.password, newUser.getPassword());
         values.put(this.telephone, newUser.getTelephone());
-        values.put("id", newUser.getId());
+        values.put("id", val);
+
         // Inserting Row
         newRowId=db.insert("user", null, values);
         db.close(); // Closing database connection
@@ -114,13 +124,22 @@ public class UserHandler extends SQLiteOpenHelper {
         }
     }
 
-    public User authUser(String username, String password){
+    public User authUser(String email, String password){
+        List<User> users=this.getAllUsers();
         //get user by name username and return user by checking checking its password
+        for (int i = 0; i <users.size() ; i++) {
+            User user=users.get(i);
+            if (user.getEmail().equals(email)){
+                if (user.getPassword().equals(password)){
+                    return user;
+                }
+            }
+        }
         return null;
     }
 
-    public List getAllUsers(){
-        List userList = new ArrayList();
+    public List<User> getAllUsers(){
+        List userList = new ArrayList<User>();
         // Select All Query
         String selectQuery = "SELECT * FROM user";
 
@@ -131,7 +150,7 @@ public class UserHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 User user = new User();
-                user.setId(Integer.parseInt(cursor.getString(0)));
+                user.setId(cursor.getString(cursor.getColumnIndex("id")));
                 user.setAddress(cursor.getString(cursor.getColumnIndex(this.address)));
                 user.setFirst_name(cursor.getString(cursor.getColumnIndex(this.first_name)));
                 user.setLast_name(cursor.getString(cursor.getColumnIndex(this.last_name)));

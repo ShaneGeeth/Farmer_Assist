@@ -1,27 +1,45 @@
 package com.example.farmer_assist;
 
 public class Product {
-    private int product_no;
+    private int id;
     private String name;
     private double price;
+    private byte[] image;
+    private String create_date;
     private String description;
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
 
     public Product() {
     }
 
     public Product(int product_no, String name, double price, String description) {
-        this.product_no = product_no;
+        this.id = product_no;
         this.name = name;
         this.price = price;
         this.description = description;
     }
 
-    public int getProduct_no() {
-        return product_no;
+    public String getCreate_date() {
+        return create_date;
+    }
+
+    public void setCreate_date(String create_date) {
+        this.create_date = create_date;
+    }
+
+    public int getProduct_id() {
+        return id;
     }
 
     public void setProduct_no(int product_no) {
-        this.product_no = product_no;
+        this.id = product_no;
     }
 
     public String getName() {
@@ -51,7 +69,7 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" +
-                "product_no=" + product_no +
+                "product_no=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", description='" + description + '\'' +

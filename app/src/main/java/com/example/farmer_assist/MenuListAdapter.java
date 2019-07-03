@@ -60,6 +60,13 @@ public class MenuListAdapter extends BaseAdapter {
                 if(result[i].equals("Weather")){
                     Intent j=new Intent(context, ShowWeatherActivity.class);
                     context.startActivity(j);
+                }else if(result[i].equals("About")) {
+                    Intent j = new Intent(context, About.class);
+                    context.startActivity(j);
+                }
+                else if(result[i].equals("Products")) {
+                    Intent j = new Intent(context, ShowProducts.class);
+                    context.startActivity(j);
                 }
             }
         });
