@@ -33,7 +33,6 @@ public class UserHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("DROP TABLE IF EXISTS user");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS user (\n" +
                 "    id  varchar(200) NOT NULL  CONSTRAINT user_pk PRIMARY KEY,\n" +
@@ -43,6 +42,15 @@ public class UserHandler extends SQLiteOpenHelper {
                 "    address text  NOT NULL,\n" +
                 "    password varchar(200) NOT NULL,\n" +
                 "    telephone varchar(200) \n" +
+                ");");
+        db.execSQL("CREATE TABLE IF NOT EXISTS product (\n" +
+                "    id INTEGER   NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
+                "    name varchar(200) NOT NULL,\n" +
+                "    price double NOT NULL,\n" +
+                "    description text  NOT NULL,\n" +
+                "    user_id varchar(200) ,\n" +
+                "    product_image blob, \n" +
+                "    create_date varchar(200) \n" +
                 ");");
 
     }

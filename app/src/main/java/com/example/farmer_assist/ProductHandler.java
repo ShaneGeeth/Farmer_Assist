@@ -19,7 +19,7 @@ public class ProductHandler extends SQLiteOpenHelper {
     //attrib
     private final String name="name";
     private final String price="price";
-    private final String image="image";
+    private final String image="product_image";
     private final String description="description";
     private final String create_date="create_date";
 
@@ -27,6 +27,20 @@ public class ProductHandler extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         mDatabase = this.getWritableDatabase();
     }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Drop older table if existed
+        db.execSQL("DROP TABLE IF EXISTS product");
+        // Create tables again
+        onCreate(db);
+    }
+
 
     public boolean createProduct(Product newProduct){
         //create new product in db
@@ -42,7 +56,7 @@ public class ProductHandler extends SQLiteOpenHelper {
         values.put(this.image,newProduct.getImage() );
         values.put("id", newProduct.getProduct_id());
         // Inserting Row
-        newRowId=db.insert("user", null, values);
+        newRowId=db.insert("product", null, values);
         db.close(); // Closing database connection
 
         if (newRowId == -1) {
@@ -62,7 +76,7 @@ public class ProductHandler extends SQLiteOpenHelper {
         return false;
     }
 
-    public List<Product> getAllProducts(Product newProduct){
+    public List<Product> getAllProducts(){
         List productList = new ArrayList<User>();
         // Select All Query
         String selectQuery = "SELECT * FROM product";
@@ -94,23 +108,6 @@ public class ProductHandler extends SQLiteOpenHelper {
         return null;
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS product (\n" +
-                "    id int  NOT NULL  CONSTRAINT user_pk PRIMARY KEY AUTOINCREMENT,\n" +
-                "    name varchar(200) NOT NULL,\n" +
-                "    price double NOT NULL,\n" +
-                "    description text  NOT NULL,\n" +
-                "    product_image blob, \n" +
-                "    create_date varchar(200) \n" +
-                ");");
-    }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Drop older table if existed
-        db.execSQL("DROP TABLE IF EXISTS product");
-        // Create tables again
-        onCreate(db);
-    }
+
 }
