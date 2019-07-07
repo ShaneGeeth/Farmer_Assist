@@ -44,7 +44,7 @@ public class UserHandler extends SQLiteOpenHelper {
                 "    telephone varchar(200) \n" +
                 ");");
         db.execSQL("CREATE TABLE IF NOT EXISTS product (\n" +
-                "    id INTEGER   NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
+                "    id varchar(200)   NOT NULL PRIMARY KEY,\n" +
                 "    name varchar(200) NOT NULL,\n" +
                 "    price double NOT NULL,\n" +
                 "    description text  NOT NULL,\n" +

@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class ProductHandler extends SQLiteOpenHelper {
     private  Product product;
@@ -47,6 +48,10 @@ public class ProductHandler extends SQLiteOpenHelper {
         long newRowId = 0;
         //create new user in DB
         SQLiteDatabase db = this.getWritableDatabase();
+        UUID uid = UUID.randomUUID();
+
+        // checking hash code value
+        String val=uid.toString();
 
         ContentValues values = new ContentValues();
         values.put(this.name, newProduct.getName());
@@ -54,7 +59,7 @@ public class ProductHandler extends SQLiteOpenHelper {
         values.put(this.price, newProduct.getPrice());
         values.put(this.create_date, newProduct.getCreate_date());
         values.put(this.image,newProduct.getImage() );
-        values.put("id", newProduct.getProduct_id());
+        values.put("id", val);
         // Inserting Row
         newRowId=db.insert("product", null, values);
         db.close(); // Closing database connection
