@@ -10,7 +10,7 @@ public class UserDashboard extends AppCompatActivity {
     MenuListAdapter menuListAdapter;
     String[] menuItem = new String[] { "Weather",
             "Products",
-            "Orders",
+            "Logout",
             "About",
     };
 

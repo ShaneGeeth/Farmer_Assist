@@ -71,9 +71,17 @@ public class ProductHandler extends SQLiteOpenHelper {
         }
     }
 
-    public boolean removeProduct(Product currentProduct){
-        //remove current product from db
-        return false;
+    public  boolean removeProduct(Product currentProduct){
+        long newRowId = 0;
+        SQLiteDatabase db = this.getWritableDatabase();
+        newRowId=db.delete("product", "id" + " = ?",
+                new String[]{currentProduct.getProduct_id()});
+
+        if (newRowId == -1) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public boolean updateProduct(Product newProduct){
@@ -93,7 +101,7 @@ public class ProductHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Product product = new Product();
-                product.setProduct_no(Integer.parseInt(cursor.getString(0)));
+                product.setProduct_no(cursor.getString(cursor.getColumnIndex("id")));
                 product.setName(cursor.getString(cursor.getColumnIndex(this.name)));
                 product.setDescription(cursor.getString(cursor.getColumnIndex(this.description)));
                 product.setPrice(Double.parseDouble(cursor.getString(cursor.getColumnIndex(this.price))));

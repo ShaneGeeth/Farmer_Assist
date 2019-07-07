@@ -1,7 +1,7 @@
 package com.example.farmer_assist;
 
 public class Product {
-    private int id;
+    private String id;
     private String name;
     private double price;
     private byte[] image;
@@ -19,7 +19,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(int product_no, String name, double price, String description) {
+    public Product(String product_no, String name, double price, String description) {
         this.id = product_no;
         this.name = name;
         this.price = price;
@@ -34,11 +34,11 @@ public class Product {
         this.create_date = create_date;
     }
 
-    public int getProduct_id() {
+    public String getProduct_id() {
         return id;
     }
 
-    public void setProduct_no(int product_no) {
+    public void setProduct_no(String product_no) {
         this.id = product_no;
     }
 

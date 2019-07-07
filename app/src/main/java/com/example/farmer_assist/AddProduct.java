@@ -93,6 +93,7 @@ public class AddProduct extends AppCompatActivity {
             newProduct.setImage(inputData);
             productHandler.createProduct(newProduct);
 
+
             return true;
         } catch (IOException ioe) {
             Log.e("A", "<saveImageInDB> Error : " + ioe.getLocalizedMessage());
@@ -100,5 +101,12 @@ public class AddProduct extends AppCompatActivity {
             return false;
         }
 
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        Intent i=new Intent(this, ShowProducts.class);
+        startActivity(i);
     }
 }

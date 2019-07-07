@@ -13,6 +13,7 @@ import com.melnykov.fab.FloatingActionButton;
 public class ShowProducts extends AppCompatActivity {
     ProductHandler productHandler;
     ListView listViewProduct;
+    private static ProductItemAdapter productItemAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +26,8 @@ public class ShowProducts extends AppCompatActivity {
         listViewProduct=findViewById(R.id.productLV);
 
         if(productHandler.getAllProducts()!=null){
-            ProductItemAdapter weatherAdapter = new ProductItemAdapter(this,productHandler.getAllProducts());
-            listViewProduct.setAdapter(weatherAdapter);
+            productItemAdapter = new ProductItemAdapter(this,productHandler.getAllProducts(),productHandler);
+            listViewProduct.setAdapter(productItemAdapter);
         }
 
 
@@ -39,5 +40,19 @@ public class ShowProducts extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+
     }
+
+    @Override
+    public void onBackPressed()
+    {
+        Intent i=new Intent(this, UserDashboard.class);
+        startActivity(i);
+    }
+
+    public static void notifyAdapter(){
+        productItemAdapter.notifyDataSetChanged();
+    }
+
 }
