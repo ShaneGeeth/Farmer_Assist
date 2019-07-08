@@ -4,4 +4,12 @@
     <string name="loading_text">Loading..</string>
     <string name="farmer_assis_title">Farmer Assist</string>
     <string name="name_text">Name</string>
+
+    <string-array name="district_arrays">
+        <item>Colombo,LK</item>
+        <item>Anuradhapura,Lk</item>
+        <item>Kurunegala,LK</item>
+        <item>Galle,LK</item>
+        <item>Polonnaruwa,LK</item>
+    </string-array>
 </resources>

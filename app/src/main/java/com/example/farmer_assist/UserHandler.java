@@ -49,6 +49,7 @@ public class UserHandler extends SQLiteOpenHelper {
                 "    price double NOT NULL,\n" +
                 "    description text  NOT NULL,\n" +
                 "    user_id varchar(200) ,\n" +
+                "    status varchar(200) ,\n" +
                 "    product_image blob, \n" +
                 "    create_date varchar(200) \n" +
                 ");");

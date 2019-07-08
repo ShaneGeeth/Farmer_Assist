@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class WeatherAdapter extends ArrayAdapter<Weather> {
@@ -20,6 +21,8 @@ public class WeatherAdapter extends ArrayAdapter<Weather> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        String pattern = "###.##";
+        DecimalFormat decimalFormat = new DecimalFormat(pattern);
         Weather weather = getItem(position);
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.forecast_temp_list_item_layout, parent, false);
@@ -29,8 +32,8 @@ public class WeatherAdapter extends ArrayAdapter<Weather> {
         TextView maxTextView = convertView.findViewById(R.id.tv_maxtemp);
         TextView descTextView = convertView.findViewById(R.id.tv_desc);
         dateTextView.setText(weather.getDate());
-        minTextView.setText("Min: "+weather.getMinTemp()+" C");
-        maxTextView.setText("Max: "+weather.getMaxTemp()+" C");
+        minTextView.setText("Min: "+decimalFormat.format(Double.parseDouble(weather.getMinTemp())-273.15)+" C");
+        maxTextView.setText("Max: "+decimalFormat.format(Double.parseDouble(weather.getMaxTemp())-273.15)+" C");
         descTextView.setText(weather.getDesc());
         return convertView;
     }

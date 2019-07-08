@@ -58,6 +58,7 @@ public class ProductHandler extends SQLiteOpenHelper {
         values.put(this.description, newProduct.getDescription());
         values.put(this.price, newProduct.getPrice());
         values.put(this.create_date, newProduct.getCreate_date());
+        values.put("status", "0");
         values.put(this.image,newProduct.getImage() );
         values.put("id", val);
         // Inserting Row
@@ -86,7 +87,24 @@ public class ProductHandler extends SQLiteOpenHelper {
 
     public boolean updateProduct(Product newProduct){
         //update product in db
-        return false;
+        long newRowId = 0;
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Creating content values
+        ContentValues values = new ContentValues();
+        values.put(this.name, newProduct.getName());
+        values.put(this.description, newProduct.getDescription());
+        values.put(this.price, newProduct.getPrice());
+//        values.put(this.name, newProduct.getName());
+
+        // update row in students table base on students.is value
+        newRowId=db.update("product", values, "id" + " = ?", new String[]{String.valueOf(newProduct.getProduct_id())});
+
+        if (newRowId == -1) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public List<Product> getAllProducts(){

@@ -11,14 +11,15 @@ import android.widget.ListView;
 import com.melnykov.fab.FloatingActionButton;
 
 public class ShowProducts extends AppCompatActivity {
-    ProductHandler productHandler;
-    ListView listViewProduct;
+    private static ProductHandler productHandler;
+    private static ListView listViewProduct;
     private static ProductItemAdapter productItemAdapter;
-
+    private static Context context2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_products);
+        context2=this;
 
         productHandler=new ProductHandler(this);
         final Context context=this;
@@ -53,6 +54,10 @@ public class ShowProducts extends AppCompatActivity {
 
     public static void notifyAdapter(){
         productItemAdapter.notifyDataSetChanged();
+        if(productHandler.getAllProducts()!=null){
+            productItemAdapter = new ProductItemAdapter(context2,productHandler.getAllProducts(),productHandler);
+            listViewProduct.setAdapter(productItemAdapter);
+        }
     }
 
 }

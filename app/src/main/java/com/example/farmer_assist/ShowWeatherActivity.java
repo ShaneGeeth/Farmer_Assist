@@ -10,7 +10,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,13 +20,14 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import static java.nio.file.Paths.get;
 
 public class ShowWeatherActivity extends AppCompatActivity {
-
+Spinner districtSpinner;
     String city="Colombo, LK";
     private static final String TAG = ShowWeatherActivity.class.getSimpleName() ;
     private ArrayList<Weather> weatherArrayList = new ArrayList<>();
@@ -36,8 +39,35 @@ public class ShowWeatherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_weather);
+
         listView=findViewById(R.id.idListView2);
         tempretureTV=findViewById(R.id.tempretureTV);
+
+        districtSpinner=findViewById(R.id.spinnerDistrict);
+
+
+        districtSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View selectedItemView, int pos, long id) {
+                Toast.makeText(parent.getContext(),
+                        "You Selected : " + parent.getItemAtPosition(pos).toString(),
+                        Toast.LENGTH_SHORT).show();
+                city= parent.getItemAtPosition(pos).toString();
+                //url for get current weather by refering city
+                URL weatherUrl = NetworkUtil2.buildUrlForWeather(city);
+                //url for get current weather by refering city
+                URL weatherUrl2 = NetworkUtill.buildUrlForWeather(city);
+                new FetchWeatherDetails2().execute(weatherUrl);
+                new FetchWeatherForecastDetails2().execute(weatherUrl2);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+
         //url for get current weather by refering city
         URL weatherUrl = NetworkUtil2.buildUrlForWeather(city);
         //url for get current weather by refering city
@@ -71,13 +101,16 @@ public class ShowWeatherActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String weatherSearchResults2) {
+            String pattern = "###.##";
+            DecimalFormat decimalFormat = new DecimalFormat(pattern);
             Log.i(TAG, weatherSearchResults2);
-            tempretureTV.setText(""+parseJSON(weatherSearchResults2)+" C");
+            tempretureTV.setText(""+decimalFormat.format(parseJSON(weatherSearchResults2))+" C");
             super.onPostExecute(weatherSearchResults2);
         }
     }
 
     private double parseJSON(String weatherSearchResults2) {
+
 
         if(weatherSearchResults2 != null){
             try{

@@ -55,11 +55,17 @@
                     android:text="34C"
                     android:textAlignment="center"
                     android:textSize="50sp" />
+                <Spinner
+                    android:id="@+id/spinnerDistrict"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/district_arrays"/>
                 <ListView
                     android:id="@+id/idListView2"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="?attr/actionBarSize"
                     />
             </LinearLayout>
 
