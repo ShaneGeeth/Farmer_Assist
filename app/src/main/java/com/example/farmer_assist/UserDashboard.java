@@ -2,8 +2,13 @@ package com.example.farmer_assist;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
+
+import com.shamanland.fab.FloatingActionButton;
 
 public class UserDashboard extends AppCompatActivity {
     ListView lv_languages;
@@ -23,6 +28,16 @@ public class UserDashboard extends AppCompatActivity {
 
         init();
         lv_languages.setAdapter(menuListAdapter);
+
+        FloatingActionButton callBtn=findViewById(R.id.fabcall);
+        callBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:1920"));
+                startActivity(intent);
+            }
+        });
     }
 
     private void init() {

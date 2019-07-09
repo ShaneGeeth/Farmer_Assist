@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:weightSum="10"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:background="@drawable/bg01"
     tools:context=".ShowProducts">
 
@@ -49,13 +50,19 @@
                 >
 
                 <TextView
-                    android:id="@+id/tempretureTV"
+                    android:id="@+id/proTV"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Products"
                     android:textAlignment="center"
                     android:textSize="50sp" />
+                <SearchView
+                    android:id="@+id/simpleSearchView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:iconifiedByDefault="false"
+                    android:queryHint="Search here"/>
                 <ListView
                     android:id="@+id/productLV"
                     android:layout_weight="1"
@@ -67,17 +74,19 @@
 
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <com.melnykov.fab.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:src="@android:drawable/ic_menu_add"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        fab:fab_colorNormal="#FF4081"
-        fab:fab_colorPressed="#C2185B"
-        fab:fab_colorRipple="#F06292"/>
+        <com.shamanland.fab.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="13dp"
+            android:layout_marginBottom="28dp"
+            android:src="@android:drawable/ic_input_add"
+            app:floatingActionButtonColor="#FF4081"
+            app:floatingActionButtonSize="normal" /></RelativeLayout>
+
 </LinearLayout>
