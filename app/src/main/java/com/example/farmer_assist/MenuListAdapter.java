@@ -1,6 +1,7 @@
 package com.example.farmer_assist;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,13 @@ public class MenuListAdapter extends BaseAdapter {
                 else if(result[i].equals("Products")) {
                     Intent j = new Intent(context, ShowProducts.class);
                     context.startActivity(j);
+                }
+                else if(result[i].equals("Logout")) {
+                    SharedPreferences settings = context.getSharedPreferences("logged_user_pref", Context.MODE_PRIVATE);
+                    settings.edit().remove("logged_user_id").commit();
+                    Intent j = new Intent(context, MainActivity.class);
+                    context.startActivity(j);
+
                 }
             }
         });

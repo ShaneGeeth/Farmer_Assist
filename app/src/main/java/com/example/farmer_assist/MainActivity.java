@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,11 +12,19 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    UserHandler userHandler;
+    private UserHandler userHandler;
+    private SharedPreferences loggedUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        loggedUser = getSharedPreferences("logged_user_pref", Context.MODE_PRIVATE);
+        if(loggedUser.contains("logged_user_id")){
+            Intent intent=new Intent(MainActivity.this,UserDashboard.class);
+            startActivity(intent);
+        }
 
         userHandler=new UserHandler(this);
         //set input variables
@@ -31,6 +40,12 @@ public class MainActivity extends AppCompatActivity {
 
                 if(userHandler.authUser(usernameET.getText().toString(),passwordET.getText().toString())!=null){
                     String name=userHandler.authUser(usernameET.getText().toString(),passwordET.getText().toString()).getFirst_name();
+                    String user_id=userHandler.authUser(usernameET.getText().toString(),passwordET.getText().toString()).getId();
+
+                    SharedPreferences.Editor editor = loggedUser.edit();
+                    editor.putString("logged_user_id", user_id);
+                    editor.commit();
+
                     Toast.makeText(context, "Hi "+name , Toast.LENGTH_LONG).show();
                     Intent intent=new Intent(MainActivity.this,UserDashboard.class);
                     startActivity(intent);
@@ -52,5 +67,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }
