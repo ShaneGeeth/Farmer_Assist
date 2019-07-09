@@ -50,7 +50,7 @@
             android:layout_margin="28dp"
             android:foreground="#fff"
             android:src="@android:drawable/ic_menu_call"
-            app:floatingActionButtonColor="#FF4081"
+            app:floatingActionButtonColor="#33FF39"
             app:floatingActionButtonSize="normal" /></RelativeLayout>
 
 </LinearLayout>

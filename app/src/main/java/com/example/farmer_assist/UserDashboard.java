@@ -34,7 +34,7 @@ public class UserDashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:19320"));
+                intent.setData(Uri.parse("tel:1920"));
                 startActivity(intent);
             }
         });
