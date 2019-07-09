@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Farmer_Assist</string>
+    <string name="app_name">Farmer Assist</string>
     <string name="textview">New</string>
     <string name="loading_text">Loading..</string>
     <string name="farmer_assis_title">Farmer Assist</string>
