@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.IntentCompat;
+
 import com.squareup.picasso.Picasso;
 
 public class MenuListAdapter extends BaseAdapter {
@@ -72,7 +75,9 @@ public class MenuListAdapter extends BaseAdapter {
                 else if(result[i].equals("Logout")) {
                     SharedPreferences settings = context.getSharedPreferences("logged_user_pref", Context.MODE_PRIVATE);
                     settings.edit().remove("logged_user_id").commit();
+
                     Intent j = new Intent(context, MainActivity.class);
+                    j.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     context.startActivity(j);
 
                 }

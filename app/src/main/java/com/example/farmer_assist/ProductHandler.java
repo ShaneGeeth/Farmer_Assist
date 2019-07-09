@@ -108,7 +108,7 @@ public class ProductHandler extends SQLiteOpenHelper {
     }
 
     public List<Product> getAllProducts(){
-        List productList = new ArrayList<User>();
+        List productList = new ArrayList<Product>();
         // Select All Query
         String selectQuery = "SELECT * FROM product";
 
@@ -139,6 +139,32 @@ public class ProductHandler extends SQLiteOpenHelper {
         return null;
     }
 
+    public List<Product> searchProduct(String keyword){
+        List productList =null;
+        // Select All Query
+        String selectQuery = "SELECT * FROM product WHERE name like ?";
 
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, new String[] { "%" + keyword + "%" });
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            productList= new ArrayList<Product>();
+            do {
+                Product product = new Product();
+                product.setProduct_no(cursor.getString(cursor.getColumnIndex("id")));
+                product.setName(cursor.getString(cursor.getColumnIndex(this.name)));
+                product.setDescription(cursor.getString(cursor.getColumnIndex(this.description)));
+                product.setPrice(Double.parseDouble(cursor.getString(cursor.getColumnIndex(this.price))));
+                product.setImage( cursor.getBlob(cursor.getColumnIndex(this.image)));
+                product.setCreate_date(cursor.getString(cursor.getColumnIndex(this.create_date)));
+                // Adding country to list
+                productList.add(product);
+            } while (cursor.moveToNext());
+        }
+
+        //return all products
+        return productList;
+    }
 
 }
